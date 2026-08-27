@@ -36,9 +36,9 @@ namespace UnityExplorer.UI.Panels
 
         public override void SetActive(bool active)
         {
-            if (this.Enabled != active)
+            if (this.UIRoot && this.UIRoot.activeSelf != active)
             {
-                base.SetActive(active);
+                this.UIRoot.SetActive(active);
 
                 if (!ApplyingSaveData)
                     SaveInternalData();
@@ -94,7 +94,7 @@ namespace UnityExplorer.UI.Panels
             {
                 return string.Join("|", new string[]
                 {
-                        $"{ShouldSaveActiveState && Enabled}",
+                        $"{ShouldSaveActiveState && UIRoot && UIRoot.activeSelf}",
                         Rect.RectAnchorsToString(),
                         Rect.RectPositionToString()
                 });
